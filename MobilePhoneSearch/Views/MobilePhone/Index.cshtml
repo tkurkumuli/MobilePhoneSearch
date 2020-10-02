@@ -1,0 +1,45 @@
+﻿@using BusinessLayer.ServiceModels.Shared;
+@using BusinessLayer.ServiceModels;
+@using MobilePhoneSearch.Helpers
+
+@model BaseSearchModel<MobilePhoneListFilterViewModel, PaginatedList<MobilePhoneModel>>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<div class="newcar-listing-section">
+    <input type="hidden" class="seos" />
+    <div class="container new-car-container">
+        <div class="row">
+            <div class="col-lg-3 col-12">
+                <div class="list-filter new-car-list-filter">
+                    <partial name="_ListFilter" model="Model.Search" />
+                </div>
+            </div>
+            <div class="col-lg-9 col-12 pb-4">
+                <div class="list-header d-flex justify-content-between align-items-center">
+                    <h6>მობილურების რაოდენობა </h6>
+                </div>
+                <div class="filter-VSMId"></div>
+                <div class="list-item-container">
+                    <partial name="Partials/_ListingItems" />
+                </div>
+                <br />
+                <div>
+                    <nav aria-label="Page navigation example">
+                        @Html.PageLinks(Model.DataModel.PagingInfo, Url.Action("Index", "MobilePhone"))
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}

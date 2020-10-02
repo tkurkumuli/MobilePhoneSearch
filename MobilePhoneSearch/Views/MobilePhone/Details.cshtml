@@ -1,0 +1,111 @@
+﻿@using MobilePhoneSearch.Models.MobilePhones
+
+@model MobilePhoneDetailViewModel
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+<div class="main_container">
+    <div class="project_details_body">
+        <div class="" style="align-content:center; align-items:center;">
+            @*<div class="details_slider">
+                    <div class="zoom"></div>
+                    <div class="slider-single">
+                        @foreach (var item in Model.Images)
+                        {
+                            <div class="item">
+                                <img src="@item" />
+                            </div>
+                        }
+                    </div>
+                </div>*@
+            <div class="row">
+                <div class="col-md-6 offset-3">
+                    <div id="carouselExampleControls" class="carousel slide" style="width:600px; height:600px; align-content:center;" data-ride="carousel">
+                        <div class="carousel-inner" style="width:600px; height:600px;">
+                            @for (int i = 0; i < Model.Images.Count; i++)
+                            {
+                                var item = Model.Images[i];
+                                if (i == 0)
+                                {
+                                    <div class="carousel-item active">
+                                        <img src="@item" class="d-block w-100" style="max-width:600px;width:600px; max-height:600px; height:600px;object-fit:cover " alt="...">
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="carousel-item">
+                                        <img src="@item" class="d-block w-100" style="max-width:600px;width:600px; max-height:600px; height:600px;object-fit:cover " alt="...">
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" style="background-color:darkseagreen;" aria-hidden="true"></span>
+                            <span class="sr-only" style="color:darkseagreen;">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" style="background-color:darkseagreen; " aria-hidden="true"></span>
+                            <span class="sr-only" style="color:darkseagreen;">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details_desc">
+                <div class="title">
+                    <h1>@Model.MObilePhoneName</h1>
+                </div>
+                <div class="properties">
+                    <div class="item">
+                        <div class="name">ზომა</div>
+                        <div class="value">@Model.Size</div>
+                    </div>
+                    <div class="item">
+                        <div class="name">წონა</div>
+                        <div class="value">@Model.Weight </div>
+                    </div>
+                    <div class="item">
+                        <div class="name">ეკრანის ზომა</div>
+                        <div class="value">@Model.ScreeenSize</div>
+                    </div>
+                    <div class="item">
+                        <div class="name">რეზოლუცია</div>
+                        <div class="value">@Model.Resolution</div>
+                    </div>
+                    <div class="item">
+                        <div class="name">პროცესორი</div>
+                        <div class="value">@Model.Processor </div>
+                    </div>
+                    <div class="item">
+                        <div class="name">მეხსიერება</div>
+                        <div class="value">@Model.Memory </div>
+                    </div>
+                    <div class="item">
+                        <div class="name">ოპერატიუყლი სისტემა</div>
+                        <div class="value">@Model.OperatingSystem </div>
+                    </div>
+                    <div class="item">
+                        <div class="name">ფასი</div>
+                        <div class="value">@Model.Price </div>
+                    </div>
+                    <div class="item">
+                        <div class="name">ვიდეო</div>
+                        <div class="value">@Model.Video </div>
+                    </div>
+                    <div class="item">
+                        <div class="name">მწარმოებელია</div>
+                        <div class="value">@Model.Manufacturer </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

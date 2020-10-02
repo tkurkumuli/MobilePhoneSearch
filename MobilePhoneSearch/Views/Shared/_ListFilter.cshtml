@@ -1,0 +1,40 @@
+﻿@using BusinessLayer.ServiceModels.Shared;
+@using BusinessLayer.ServiceModels;
+@using MobilePhoneSearch.Helpers
+
+@model MobilePhoneListFilterViewModel
+
+@{
+    var manufacturers = (List<SelectListItem>)ViewBag.Manufacturers;
+}
+
+<form asp-action="List" method="get" id="ListFilter">
+    <div class="form-group">
+        <h6>დასახელება</h6>
+        <div class="d-flex justify-content-between filter-select-group">
+            <div class="valute-changer mr-2">
+                <input asp-for="SearchModel.MobileName" class="form-control pl-3 pr-0" />
+
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <select asp-for="SearchModel.ManufacturerId" asp-items="manufacturers" id="districtId" data-live-search="true" class="form-control district selectpicker">
+            <option value="0">გთხოვთ აირჩიოთ</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <h6>ფასი</h6>
+        <div class="d-flex justify-content-between filter-select-group">
+            <input asp-for="SearchModel.PriceFrom" class="form-control" placeholder="დან" />
+            <input asp-for="SearchModel.PriceTo" class="form-control" placeholder="მდე" />
+        </div>
+    </div>
+    <div class="fixed-section">
+        <button class="btn btn-primary searchBtn mt-3">განხცადებების ძებნა</button>
+    </div>
+
+</form>
+
+
+

@@ -1,0 +1,32 @@
+﻿@using BusinessLayer.ServiceModels.Shared;
+@using BusinessLayer.ServiceModels;
+@using MobilePhoneSearch.Helpers
+
+@model BaseSearchModel<MobilePhoneListFilterViewModel, PaginatedList<MobilePhoneModel>>
+
+@{
+        var manufacturers = (List<SelectListItem>)ViewBag.Manufacturers;
+}
+
+<div class="row w-100 ml-0">
+
+    @if (Model.DataModel.Count() != 0)
+    {
+        @foreach (var px in Model.DataModel)
+        {
+            <div class="col-md-4 listing-item">
+                <div class="item item-new-landing details-page-activities">
+                    <a href="@Url.Action("Details","MobilePhone", new { id = px.MobileId})">
+                        <div class="item-image" style="	background: linear-gradient(180deg, rgba(0,0,0,0) 41.21%, rgba(0,0,0,0.5) 100%), url(@px.ImageUrl); height:200px">
+                            <div class="category-title new-title">@manufacturers.FirstOrDefault().Value</div>
+                        </div>
+                    </a>
+                    <a href="@Url.Action("Details","MobilePhone", new { id = px.MobileId})"><h4>@px.MobileName</h4></a>
+                    <div class="item-bottom">
+                        <div class="item-descr" style="padding: 0 5px;">@Html.Raw(px.Price)</div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
