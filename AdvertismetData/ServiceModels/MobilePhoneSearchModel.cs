@@ -11,8 +11,7 @@ namespace BusinessLayer.ServiceModels
         public decimal? Price { get; set; }
         public decimal? PriceFrom { get; set; }
         public decimal? PriceTo { get; set; }
-        //public List<int> Manufacturers { get; set; }
-        public int? ManufacturerId { get; set; }
+        public int ManufacturerId { get; set; }
         public string ImageUrl  { get; set; }
     }
 }

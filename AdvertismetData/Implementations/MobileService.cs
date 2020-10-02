@@ -24,10 +24,10 @@ namespace BusinessLayer.Implementations
         {
            return _context.MobilePhones.Include(x => x.Images)
                        .Where(x =>
-                             (String.IsNullOrEmpty(filter.SearchModel.MobileName) || x.Name.Contains(filter.SearchModel.MobileName))
+                             (String.IsNullOrEmpty(filter.SearchModel.MobileName) || x.Name.Trim().ToLower().Contains(filter.SearchModel.MobileName.Trim().ToLower()))
                               && (!filter.SearchModel.PriceFrom.HasValue || x.Price >= filter.SearchModel.PriceFrom)
                               && (!filter.SearchModel.PriceTo.HasValue || x.Price <= filter.SearchModel.PriceTo)
-                              && (filter.SearchModel.ManufacturerId == null || x.ManufacturerId == filter.SearchModel.ManufacturerId)
+                              && (filter.SearchModel.ManufacturerId == 0 || x.ManufacturerId == filter.SearchModel.ManufacturerId)
                                ).
                                    Select(x => new MobilePhoneModel
                                    {
