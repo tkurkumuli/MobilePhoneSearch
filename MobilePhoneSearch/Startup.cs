@@ -42,7 +42,6 @@ namespace MobilePhoneSearch
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IMobileService, MobileService>();
-            services.AddScoped<IManufacturerService, ManufacturerService>();
             services.AddAutoMapper(typeof(Startup).GetTypeInfo().Assembly);
         }
 
