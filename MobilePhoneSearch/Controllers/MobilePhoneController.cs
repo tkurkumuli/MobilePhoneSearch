@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer.Interfaces;
-using BusinessLayer.ServiceModels;
-using BusinessLayer.ServiceModels.Shared;
+using BusinessLayer.Models;
+using BusinessLayer.Models.Shared;
 using Microsoft.AspNetCore.Mvc;
 using MobilePhoneSearch.Helpers;
 using MobilePhoneSearch.Models.MobilePhones;
@@ -25,7 +25,7 @@ namespace MobilePhoneSearch.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(MobilePhoneListFilterViewModel filter, PagingInfo paging)
+        public IActionResult Index(MobilePhoneListFilterModel filter, PagingInfo paging)
         {
             var mobilephones = _mobileService.GetMobilePhones(filter);
             var manufacturers = _mobileService.GetManufacturers();
@@ -33,7 +33,7 @@ namespace MobilePhoneSearch.Controllers
             var paged = new PaginatedList<MobilePhone>(mobilephones, paging);
             paging.SearchModel = filter;
 
-            return View(new BaseSearchModel<MobilePhoneListFilterViewModel, PaginatedList<MobilePhone>>()
+            return View(new BaseSearchModel<MobilePhoneListFilterModel, PaginatedList<MobilePhone>>()
             {
                 Search = filter,
                 DataModel = paged,

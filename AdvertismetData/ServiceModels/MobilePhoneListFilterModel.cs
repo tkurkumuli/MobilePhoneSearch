@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BusinessLayer.ServiceModels
+namespace BusinessLayer.Models
 {
-    public class MobilePhoneListFilterViewModel
+    public class MobilePhoneListFilterModel
     {
         public string MobileName { get; set; }
         public decimal? PriceFrom { get; set; }

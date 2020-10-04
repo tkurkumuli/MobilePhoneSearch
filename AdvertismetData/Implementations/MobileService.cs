@@ -1,5 +1,5 @@
 ﻿using BusinessLayer.Interfaces;
-using BusinessLayer.ServiceModels;
+using BusinessLayer.Models;
 using DataLayer;
 using DataLayer.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -19,7 +19,7 @@ namespace BusinessLayer.Implementations
             _context = context;
         }
 
-        public IQueryable<MobilePhone> GetMobilePhones(MobilePhoneListFilterViewModel filter)
+        public IQueryable<MobilePhone> GetMobilePhones(MobilePhoneListFilterModel filter)
         {
             return _context.MobilePhones.Include(x => x.Images)
                         .Where(x =>

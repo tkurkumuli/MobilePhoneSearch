@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BusinessLayer.ServiceModels.Shared
+namespace BusinessLayer.Models.Shared
 {
     public class BaseSearchModel<T1, T2>
     {

@@ -1,9 +1,9 @@
-﻿@using BusinessLayer.ServiceModels.Shared;
-@using BusinessLayer.ServiceModels;
+﻿@using BusinessLayer.Models.Shared;
+@using BusinessLayer.Models;
 @using MobilePhoneSearch.Helpers;
 @using DataLayer.Models;
 
-@model BaseSearchModel<MobilePhoneListFilterViewModel, PaginatedList<MobilePhone>>
+@model BaseSearchModel<MobilePhoneListFilterModel, PaginatedList<MobilePhone>>
 
 @{
         var manufacturers = (List<SelectListItem>)ViewBag.Manufacturers;

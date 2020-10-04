@@ -1,4 +1,4 @@
-﻿using BusinessLayer.ServiceModels;
+﻿using BusinessLayer.Models;
 using DataLayer.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -10,7 +10,7 @@ namespace BusinessLayer.Interfaces
 {
     public interface IMobileService
     {
-        IQueryable<MobilePhone> GetMobilePhones(MobilePhoneListFilterViewModel filter);
+        IQueryable<MobilePhone> GetMobilePhones(MobilePhoneListFilterModel filter);
         MobilePhone GetMobilehoneDetails(int id);
         List<SelectListItem> GetManufacturers();
     }
