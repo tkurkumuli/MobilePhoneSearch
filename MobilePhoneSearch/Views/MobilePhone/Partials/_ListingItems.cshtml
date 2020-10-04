@@ -2,8 +2,9 @@
 @using BusinessLayer.Models;
 @using MobilePhoneSearch.Helpers;
 @using DataLayer.Models;
+@using MobilePhoneSearch.Models.MobilePhones;
 
-@model BaseSearchModel<MobilePhoneListFilterModel, PaginatedList<MobilePhone>>
+@model BaseSearchModel<MobilePhoneListViewModel, PaginatedList<MobilePhone>>
 
 @{
         var manufacturers = (List<SelectListItem>)ViewBag.Manufacturers;

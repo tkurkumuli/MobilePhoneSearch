@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BusinessLayer.ServiceModels;
+using BusinessLayer.Models;
 using DataLayer.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MobilePhoneSearch.Models.MobilePhones;

@@ -25,21 +25,20 @@ namespace MobilePhoneSearch.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(MobilePhoneListFilterModel filter, PagingInfo paging)
+        public IActionResult Index(MobilePhoneListViewModel model, PagingInfo paging)
         {
-            var mobilephones = _mobileService.GetMobilePhones(filter);
+            var mobilephones = _mobileService.GetMobilePhones(model.Filter);
             var manufacturers = _mobileService.GetManufacturers();
             ViewBag.Manufacturers = manufacturers;
             var paged = new PaginatedList<MobilePhone>(mobilephones, paging);
-            paging.SearchModel = filter;
-
-            return View(new BaseSearchModel<MobilePhoneListFilterModel, PaginatedList<MobilePhone>>()
+            paging.SearchModel = model;
+            return View(new BaseSearchModel<MobilePhoneListViewModel, PaginatedList<MobilePhone>>()
             {
-                Search = filter,
+                Search = model,
                 DataModel = paged,
             });
         }
-
+        [HttpGet]
         public IActionResult Details(int id)
         {
             if (id > 0 )

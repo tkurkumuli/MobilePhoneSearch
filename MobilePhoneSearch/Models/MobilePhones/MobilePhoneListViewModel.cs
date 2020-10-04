@@ -9,6 +9,6 @@ namespace MobilePhoneSearch.Models.MobilePhones
 {
     public class MobilePhoneListViewModel
     {
-        public MobilePhone SearchModel { get; set; }
+        public MobilePhoneListFilterModel Filter { get; set; } = new MobilePhoneListFilterModel();
     }
 }

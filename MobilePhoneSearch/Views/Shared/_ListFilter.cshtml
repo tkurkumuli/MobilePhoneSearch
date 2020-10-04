@@ -1,8 +1,9 @@
-﻿@using BusinessLayer.ServiceModels.Shared;
-@using BusinessLayer.ServiceModels;
+﻿@using BusinessLayer.Models.Shared;
+@using BusinessLayer.Models;
 @using MobilePhoneSearch.Helpers
+@using MobilePhoneSearch.Models.MobilePhones;
 
-@model MobilePhoneListFilterModel
+@model MobilePhoneListViewModel
 
 @{
     var manufacturers = (List<SelectListItem>)ViewBag.Manufacturers;
@@ -13,21 +14,21 @@
         <h6>დასახელება</h6>
         <div class="d-flex justify-content-between filter-select-group">
             <div class="valute-changer mr-2">
-                <input asp-for="MobileName" class="form-control pl-3 pr-0" />
+                <input asp-for="Filter.MobileName" class="form-control pl-3 pr-0" />
 
             </div>
         </div>
     </div>
     <div class="form-group">
-        <select asp-for="ManufacturerId" asp-items="manufacturers" id="districtId" data-live-search="true" class="form-control district selectpicker">
+        <select asp-for="Filter.ManufacturerId" asp-items="manufacturers" id="districtId" data-live-search="true" class="form-control district selectpicker">
             <option value="0">გთხოვთ აირჩიოთ</option>
         </select>
     </div>
     <div class="form-group">
         <h6>ფასი</h6>
         <div class="d-flex justify-content-between filter-select-group">
-            <input asp-for="PriceFrom" class="form-control" placeholder="დან" />
-            <input asp-for="PriceTo" class="form-control" placeholder="მდე" />
+            <input asp-for="Filter.PriceFrom" class="form-control" placeholder="დან" />
+            <input asp-for="Filter.PriceTo" class="form-control" placeholder="მდე" />
         </div>
     </div>
     <div class="fixed-section">
