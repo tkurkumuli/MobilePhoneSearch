@@ -4,7 +4,6 @@ using DataLayer;
 using DataLayer.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using MobilePhoneSearch.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,48 +19,23 @@ namespace BusinessLayer.Implementations
             _context = context;
         }
 
-        public IQueryable<MobilePhoneModel> GetMobilePhones(MobilePhoneListFilterViewModel filter, PagingInfo paging)
+        public IQueryable<MobilePhone> GetMobilePhones(MobilePhoneListFilterViewModel filter)
         {
-           return _context.MobilePhones.Include(x => x.Images)
-                       .Where(x =>
-                             (String.IsNullOrEmpty(filter.SearchModel.MobileName) || x.Name.Trim().ToLower().Contains(filter.SearchModel.MobileName.Trim().ToLower()))
-                              && (!filter.SearchModel.PriceFrom.HasValue || x.Price >= filter.SearchModel.PriceFrom)
-                              && (!filter.SearchModel.PriceTo.HasValue || x.Price <= filter.SearchModel.PriceTo)
-                              && (filter.SearchModel.ManufacturerId == 0 || x.ManufacturerId == filter.SearchModel.ManufacturerId)
-                               ).
-                                   Select(x => new MobilePhoneModel
-                                   {
-                                       MobileId = x.Id,
-                                       Price = x.Price,
-                                       MobileName = x.Name,
-                                       ImageUrl = x.Images.FirstOrDefault(m => m.IsMain == true).ImageUrl
-                                   });
-
-         
+            return _context.MobilePhones.Include(x => x.Images)
+                        .Where(x =>
+                              (String.IsNullOrEmpty(filter.MobileName) || x.Name.Trim().ToLower().Contains(filter.MobileName.Trim().ToLower()))
+                               && (!filter.PriceFrom.HasValue || x.Price >= filter.PriceFrom)
+                               && (!filter.PriceTo.HasValue || x.Price <= filter.PriceTo)
+                               && (filter.ManufacturerId == 0 || x.ManufacturerId == filter.ManufacturerId)
+                                );
         }
 
-        public MobilePhoneDetailsResponseModel GetMobilehoneDetails(int id)
+        public MobilePhone GetMobilehoneDetails(int id)
         {
-           var result = new MobilePhoneDetailsResponseModel();
+           var result = new MobilePhone();
             if (id > 0)
             {
-                var mobilephone = _context.MobilePhones.Include(x => x.Manufacturer).Include(x => x.Images).FirstOrDefault(x => x.Id == id);
-                if (mobilephone != null)
-                {
-                    result.Id = mobilephone.Id;
-                    result.MObilePhoneName = mobilephone.Name;
-                    result.Size = mobilephone.Size;
-                    result.Weight = mobilephone.Weight;
-                    result.ScreeenSize = mobilephone.ScreeenSize;
-                    result.Resolution = mobilephone.Resolution;
-                    result.Processor = mobilephone.Processor;
-                    result.Memory = mobilephone.Memory;
-                    result.OperatingSystem = mobilephone.OperatingSystem;
-                    result.Price = mobilephone.Price;
-                    result.Video = mobilephone.Video;
-                    result.Manufacturer = mobilephone.Manufacturer.ManufacturerName;
-                    result.Images = mobilephone.Images.Select(m => m.ImageUrl).ToList();
-                }
+                result = _context.MobilePhones.Include(x => x.Manufacturer).Include(x => x.Images).FirstOrDefault(x => x.Id == id);
             }
             return result;
         }

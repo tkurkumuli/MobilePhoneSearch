@@ -1,9 +1,9 @@
 ﻿@using BusinessLayer.ServiceModels.Shared;
 @using BusinessLayer.ServiceModels;
-@using MobilePhoneSearch.Helpers
+@using MobilePhoneSearch.Helpers;
+@using DataLayer.Models;
 
-@model BaseSearchModel<MobilePhoneListFilterViewModel, PaginatedList<MobilePhoneModel>>
-
+@model BaseSearchModel<MobilePhoneListFilterViewModel, PaginatedList<MobilePhone>>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
 <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />

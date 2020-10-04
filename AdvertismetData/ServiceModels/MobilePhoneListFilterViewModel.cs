@@ -6,6 +6,9 @@ namespace BusinessLayer.ServiceModels
 {
     public class MobilePhoneListFilterViewModel
     {
-        public MobilePhoneSearchModel SearchModel { get; set; } = new MobilePhoneSearchModel();
+        public string MobileName { get; set; }
+        public decimal? PriceFrom { get; set; }
+        public decimal? PriceTo { get; set; }
+        public int ManufacturerId { get; set; }
     }
 }

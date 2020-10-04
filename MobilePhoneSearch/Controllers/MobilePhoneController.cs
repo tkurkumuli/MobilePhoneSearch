@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using MobilePhoneSearch.Helpers;
 using MobilePhoneSearch.Models.MobilePhones;
 using AutoMapper;
+using DataLayer.Models;
 
 namespace MobilePhoneSearch.Controllers
 {
@@ -26,14 +27,13 @@ namespace MobilePhoneSearch.Controllers
         [HttpGet]
         public IActionResult Index(MobilePhoneListFilterViewModel filter, PagingInfo paging)
         {
-            MobilePhoneListViewModel result = new MobilePhoneListViewModel();
-            var mobilephones = _mobileService.GetMobilePhones(filter, paging);
+            var mobilephones = _mobileService.GetMobilePhones(filter);
             var manufacturers = _mobileService.GetManufacturers();
             ViewBag.Manufacturers = manufacturers;
-            var paged = new PaginatedList<MobilePhoneModel>(mobilephones, paging);
+            var paged = new PaginatedList<MobilePhone>(mobilephones, paging);
             paging.SearchModel = filter;
 
-            return View(new BaseSearchModel<MobilePhoneListFilterViewModel, PaginatedList<MobilePhoneModel>>()
+            return View(new BaseSearchModel<MobilePhoneListFilterViewModel, PaginatedList<MobilePhone>>()
             {
                 Search = filter,
                 DataModel = paged,
