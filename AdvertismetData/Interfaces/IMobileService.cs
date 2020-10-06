@@ -12,6 +12,5 @@ namespace BusinessLayer.Interfaces
     {
         IQueryable<MobilePhone> GetMobilePhones(MobilePhoneListFilterModel filter);
         MobilePhone GetMobilehoneDetails(int id);
-        List<SelectListItem> GetManufacturers();
     }
 }

@@ -10,25 +10,26 @@ using MobilePhoneSearch.Helpers;
 using MobilePhoneSearch.Models.MobilePhones;
 using AutoMapper;
 using DataLayer.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using BusinessLayer;
 
 namespace MobilePhoneSearch.Controllers
 {
     public class MobilePhoneController : Controller
     {
-        private readonly IMobileService _mobileService;
+        private IDataManager manager;
         private readonly IMapper _mapper;
 
-        public MobilePhoneController(IMobileService mobileService, IMapper mapper)
+        public MobilePhoneController(IDataManager manager, IMapper mapper)
         {
-            _mobileService = mobileService;
-            _mapper = mapper;
+             this.manager = manager;
+              _mapper = mapper;
         }
-
         [HttpGet]
         public IActionResult Index(MobilePhoneListViewModel model, PagingInfo paging)
         {
-            var mobilephones = _mobileService.GetMobilePhones(model.Filter);
-            var manufacturers = _mobileService.GetManufacturers();
+            var mobilephones = manager.Mobilephones.Get(model.Filter).AsQueryable();
+            var manufacturers = Get();
             ViewBag.Manufacturers = manufacturers;
             var paged = new PaginatedList<MobilePhone>(mobilephones, paging);
             paging.SearchModel = model;
@@ -41,9 +42,9 @@ namespace MobilePhoneSearch.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            if (id > 0 )
+            if (id > 0)
             {
-                var details = _mobileService.GetMobilehoneDetails(id);
+                var details = manager.Mobilephones.GetMobilehoneDetails(id);
                 if (details != null)
                 {
                     var model = _mapper.Map<MobilePhoneDetailViewModel>(details);
@@ -51,6 +52,17 @@ namespace MobilePhoneSearch.Controllers
                 }
             }
             return View(new MobilePhoneDetailViewModel());
+        }
+        [HttpGet]
+        public List<SelectListItem> Get()
+        {
+            var result = new List<SelectListItem>();
+            var manufacturers = manager.Manufacturers.Get();
+            foreach (var item in manufacturers)
+            {
+                result.Add(new SelectListItem { Text = item.ManufacturerName.ToString(), Value = item.ManufacturerId.ToString() });
+            }
+            return result;
         }
     }
 }
