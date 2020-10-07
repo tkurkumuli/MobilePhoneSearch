@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BusinessLayer.Interfaces;
-using BusinessLayer.Models;
+﻿using AutoMapper;
+using BusinessLayer;
 using BusinessLayer.Models.Shared;
+using DataLayer.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MobilePhoneSearch.Helpers;
 using MobilePhoneSearch.Models.MobilePhones;
-using AutoMapper;
-using DataLayer.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using BusinessLayer;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MobilePhoneSearch.Controllers
 {
