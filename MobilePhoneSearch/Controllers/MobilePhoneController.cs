@@ -3,48 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer.Interfaces;
-using BusinessLayer.ServiceModels;
-using BusinessLayer.ServiceModels.Shared;
+using BusinessLayer.Models;
+using BusinessLayer.Models.Shared;
 using Microsoft.AspNetCore.Mvc;
 using MobilePhoneSearch.Helpers;
 using MobilePhoneSearch.Models.MobilePhones;
 using AutoMapper;
+using DataLayer.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using BusinessLayer;
 
 namespace MobilePhoneSearch.Controllers
 {
     public class MobilePhoneController : Controller
     {
-        private readonly IMobileService _mobileService;
+        private IDataManager manager;
         private readonly IMapper _mapper;
 
-        public MobilePhoneController(IMobileService mobileService, IMapper mapper)
+        public MobilePhoneController(IDataManager manager, IMapper mapper)
         {
-            _mobileService = mobileService;
-            _mapper = mapper;
+             this.manager = manager;
+              _mapper = mapper;
         }
-
         [HttpGet]
-        public IActionResult Index(MobilePhoneListFilterViewModel filter, PagingInfo paging)
+        public IActionResult Index(MobilePhoneListViewModel model, PagingInfo paging)
         {
-            MobilePhoneListViewModel result = new MobilePhoneListViewModel();
-            var mobilephones = _mobileService.GetMobilePhones(filter, paging);
-            var manufacturers = _mobileService.GetManufacturers();
+            var mobilephones = manager.Mobilephones.Get(model.Filter).AsQueryable();
+            var manufacturers = Get();
             ViewBag.Manufacturers = manufacturers;
-            var paged = new PaginatedList<MobilePhoneModel>(mobilephones, paging);
-            paging.SearchModel = filter;
-
-            return View(new BaseSearchModel<MobilePhoneListFilterViewModel, PaginatedList<MobilePhoneModel>>()
+            var paged = new PaginatedList<MobilePhone>(mobilephones, paging);
+            paging.SearchModel = model;
+            return View(new BaseSearchModel<MobilePhoneListViewModel, PaginatedList<MobilePhone>>()
             {
-                Search = filter,
+                Search = model,
                 DataModel = paged,
             });
         }
-
+        [HttpGet]
         public IActionResult Details(int id)
         {
-            if (id > 0 )
+            if (id > 0)
             {
-                var details = _mobileService.GetMobilehoneDetails(id);
+                var details = manager.Mobilephones.GetMobilehoneDetails(id);
                 if (details != null)
                 {
                     var model = _mapper.Map<MobilePhoneDetailViewModel>(details);
@@ -52,6 +52,17 @@ namespace MobilePhoneSearch.Controllers
                 }
             }
             return View(new MobilePhoneDetailViewModel());
+        }
+        [HttpGet]
+        public List<SelectListItem> Get()
+        {
+            var result = new List<SelectListItem>();
+            var manufacturers = manager.Manufacturers.Get();
+            foreach (var item in manufacturers)
+            {
+                result.Add(new SelectListItem { Text = item.ManufacturerName.ToString(), Value = item.ManufacturerId.ToString() });
+            }
+            return result;
         }
     }
 }

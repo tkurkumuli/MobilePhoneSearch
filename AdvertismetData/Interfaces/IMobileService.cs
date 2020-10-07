@@ -1,6 +1,6 @@
-﻿using BusinessLayer.ServiceModels;
+﻿using BusinessLayer.Models;
+using DataLayer.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using MobilePhoneSearch.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +10,7 @@ namespace BusinessLayer.Interfaces
 {
     public interface IMobileService
     {
-        MobilePhoneDetailsResponseModel GetMobilehoneDetails(int id);
-        IQueryable<MobilePhoneModel> GetMobilePhones(MobilePhoneListFilterViewModel filter, PagingInfo paging);
-       // IQueryable<KeyValuePair<int, string>> GetManufacturers();
-        List<SelectListItem> GetManufacturers();
+        IQueryable<MobilePhone> GetMobilePhones(MobilePhoneListFilterModel filter);
+        MobilePhone GetMobilehoneDetails(int id);
     }
 }

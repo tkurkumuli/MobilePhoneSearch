@@ -1,4 +1,5 @@
-﻿using BusinessLayer.ServiceModels;
+﻿using BusinessLayer.Models;
+using DataLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,6 @@ namespace MobilePhoneSearch.Models.MobilePhones
 {
     public class MobilePhoneListViewModel
     {
-        public MobilePhoneSearchModel SearchModel { get; set; }
+        public MobilePhoneListFilterModel Filter { get; set; } = new MobilePhoneListFilterModel();
     }
 }

@@ -1,8 +1,10 @@
-﻿@using BusinessLayer.ServiceModels.Shared;
-@using BusinessLayer.ServiceModels;
-@using MobilePhoneSearch.Helpers
+﻿@using BusinessLayer.Models.Shared;
+@using BusinessLayer.Models;
+@using MobilePhoneSearch.Helpers;
+@using DataLayer.Models;
+@using MobilePhoneSearch.Models.MobilePhones;
 
-@model BaseSearchModel<MobilePhoneListFilterViewModel, PaginatedList<MobilePhoneModel>>
+@model BaseSearchModel<MobilePhoneListViewModel, PaginatedList<MobilePhone>>
 
 @{
         var manufacturers = (List<SelectListItem>)ViewBag.Manufacturers;
@@ -16,12 +18,12 @@
         {
             <div class="col-md-4 listing-item">
                 <div class="item item-new-landing details-page-activities">
-                    <a href="@Url.Action("Details","MobilePhone", new { id = px.MobileId})">
-                        <div class="item-image" style="	background: linear-gradient(180deg, rgba(0,0,0,0) 41.21%, rgba(0,0,0,0.5) 100%), url(@px.ImageUrl); height:200px">
+                    <a href="@Url.Action("Details","MobilePhone", new { id = px.Id})">
+                        <div class="item-image" style="	background: linear-gradient(180deg, rgba(0,0,0,0) 41.21%, rgba(0,0,0,0.5) 100%), url(@px.Images.FirstOrDefault(x => x.IsMain == true).ImageUrl); height:200px">
                             <div class="category-title new-title">@manufacturers.FirstOrDefault().Value</div>
                         </div>
                     </a>
-                    <a href="@Url.Action("Details","MobilePhone", new { id = px.MobileId})"><h4>@px.MobileName</h4></a>
+                    <a href="@Url.Action("Details","MobilePhone", new { id = px.Id})"><h4>@px.Name</h4></a>
                     <div class="item-bottom">
                         <div class="item-descr" style="padding: 0 5px;">@Html.Raw(px.Price)</div>
                     </div>

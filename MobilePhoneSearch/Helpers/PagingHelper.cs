@@ -12,8 +12,6 @@ using System.Threading.Tasks;
 {
     public static class PagingHelper
     {
-       
-
         public static IHtmlContent PageLinks(this IHtmlHelper html, PagingInfo pagingInfo, string actionLink = null, string updateTargetId = null)
         {
             if (pagingInfo.TotalItems > 0)
@@ -145,9 +143,6 @@ using System.Threading.Tasks;
             content.WriteTo(writer, HtmlEncoder.Default);
             return writer.ToString();
         }
-
-     
-
     }
     public class PaginatedList<T> : List<T>
     {
@@ -208,20 +203,6 @@ using System.Threading.Tasks;
             PagingInfo.CurrentPageEnd = PagingInfo.Skip + currentItems.Count();
             AddRange(currentItems);
         }
-        //public PaginatedList(IQueryable<T> source, int currentPage, int pageSize, 
-        //    int totalItems, int? pagingLinksCount, string sortBy, string sortDir)
-        //{
-        //    PagingInfo = new PagingInfo
-        //    {
-        //        SortBy = sortBy,
-        //        SortDir = sortDir,
-        //        CurrentPage = currentPage,
-        //        PageSize = pageSize,
-        //        TotalItems = totalItems,
-        //        PagingLinksCount = pagingLinksCount ?? 5
-        //    };
-        //    AddRange(source);
-        //}
     }
     public enum PageSizes
     {
@@ -234,7 +215,6 @@ using System.Threading.Tasks;
     }
     public class PagingInfo
     {
-        //public string SearchUrl { get; set; }
         private string sortDir;
         public string SortDir
         {
@@ -245,18 +225,15 @@ using System.Threading.Tasks;
             set { sortDir = value; }
         }
         public string SortBy { get; set; }
-
         public int TotalItems { get; set; }
         public int PageSize { get; set; } = 2;
         public int Page { get; set; } = 1;
-
         public int TotalPages => (int)Math.Ceiling(TotalItems / (double)PageSize);
         public int CurrentPageStart => Skip + 1;
         public int CurrentPageEnd { get; set; }
         public int PagingLinksCount { get; set; } = 5;
         public object SearchModel { get; set; }
         public int Skip => (Page - 1) * PageSize;
-
         public int PagingStartLink
         {
             get
@@ -267,7 +244,6 @@ using System.Threading.Tasks;
                 return (asd < maxFirstLink) ? asd : maxFirstLink;
             }
         }
-
         public int PagingEndLink
         {
             get
@@ -276,13 +252,9 @@ using System.Threading.Tasks;
                 return (asd < TotalPages) ? asd : TotalPages;
             }
         }
-
         public bool HasPreviousPage => (Page > 1);
-
         public bool HasNextPage => (Page < TotalPages);
-
         public string ActionLink { get; internal set; }
-
         public string GetUrl(int i)
         {
             var searchUrl = "?";
@@ -313,9 +285,7 @@ using System.Threading.Tasks;
                     }
                 }
             }
-
             var result = "";
-
             if (!string.IsNullOrEmpty(SortBy))
             {
                 if (searchUrl.Contains("SortBy=") || searchUrl.Contains("sortby="))
@@ -335,20 +305,16 @@ using System.Threading.Tasks;
                     searchUrl = searchUrl.Substring(0, searchUrl.IndexOf(sb));
                 }
             }
-
             if (i > 0)
             {
                 result += "page=" + i + "&";
             }
-
             PageSizes size;
             var succ = Enum.TryParse(PageSize.ToString(), out size);
             if (succ && size != PageSizes.P20 && size != 0)
             {
                 result += "pagesize=" + PageSize + "&";
             }
-
-            //var searchUrl = SearchUrl + (SearchUrl.Contains('?') ? string.Empty : "?");
             result = result.Substring(result.Length - 1) == "&" ? result.Substring(0, result.Length - 1) : result;
             if (!string.IsNullOrEmpty(result))
             {
