@@ -1,12 +1,8 @@
-﻿using BusinessLayer.Interfaces;
-using DataLayer;
-using DataLayer.Models;
+﻿using DataLayer.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace BusinessLayer.Implementations
+namespace BusinessLayer.Repositories.Implementations
 {
     public class ManufacturerService : Repository<Manufacturer>
     {

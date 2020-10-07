@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BusinessLayer.Repositories
+namespace BusinessLayer.Repositories.Intefaces
 {
     public interface IRepository<TEntity> where TEntity : class
     {
